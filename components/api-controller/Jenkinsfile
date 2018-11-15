@@ -102,7 +102,7 @@ def execute(command, envs = []) {
     def repositoryName = 'kyma'
     def envText = envs=='' ? '' : "--env $envs"
     workDir = pwd()
-    sh "docker run --rm -v $workDir:/go/src/github.com/kyma-project/$repositoryName/ -w /go/src/github.com/kyma-project/$repositoryName/$env.APP_FOLDER $envText ${env.DOCKER_REGISTRY}$buildpack /bin/bash -c '$command'"
+    sh "docker run --rm -v $workDir:/go/src/github.com/kyma-project/$repositoryName/ -w /go/src/github.com/kyma-project/$repositoryName/$env.APP_FOLDER $envText ${env.DOCKER_REGISTRY}$buildpack df && /bin/bash -c '$command'"
 }
 
 def slaveDiagnostics() {
