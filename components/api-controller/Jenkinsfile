@@ -104,8 +104,9 @@ def execute(command, envs = []) {
     def envText = envs=='' ? '' : "--env $envs"
     workDir = pwd()
     def appFolder = $env.APP_FOLDER
+    def registry = $env.DOCKER_REGISTRY
 
-    container("${env.DOCKER_REGISTRY}$buildpack") {
+    container("${registry}${buildpack}") {
         sh "ln -s $workDir /go/src/github.com/kyma-project/$repositoryName"
         sh "cd /go/src/github.com/kyma-project/$repositoryName/$appFolder"
         sh "bash -c $command"
