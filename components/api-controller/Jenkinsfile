@@ -103,10 +103,12 @@ def execute(command, envs = []) {
     def repositoryName = 'kyma'
     def envText = envs=='' ? '' : "--env $envs"
     workDir = pwd()
+    def appFolder = $env.APP_FOLDER
 
     container("${env.DOCKER_REGISTRY}$buildpack") {
-        ln -s $workDir "/go/src/github.com/kyma-project/$repositoryName/$env.APP_FOLDER"
-        bash -c $command
+        sh "ln -s $workDir /go/src/github.com/kyma-project/$repositoryName"
+        sh "cd /go/src/github.com/kyma-project/$repositoryName/$appFolder"
+        sh "bash -c $command"
     }
     //sh "docker run --rm -v $workDir:/go/src/github.com/kyma-project/$repositoryName/ -w /go/src/github.com/kyma-project/$repositoryName/$env.APP_FOLDER $envText ${env.DOCKER_REGISTRY}$buildpack /bin/bash -c '$command'"
 }
