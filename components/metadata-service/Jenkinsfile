@@ -87,6 +87,7 @@ podTemplate(label: label) {
             }
         } catch (ex) {
             slaveDiagnostics()
+            execute("df -h")
 
             echo "Got exception: ${ex}"
             currentBuild.result = "FAILURE"
