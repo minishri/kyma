@@ -112,6 +112,7 @@ def execute(command, envs = []) {
 
 
     container("golang-buildpack") {
+        sh "mkdir -p /go/src/github.com/kyma-project"
         sh "ln -s $workDir /go/src/github.com/kyma-project/$repositoryName"
         sh "cd /go/src/github.com/kyma-project/$repositoryName/$appFolder"
         sh "bash -c $command"
