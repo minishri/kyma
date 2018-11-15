@@ -20,8 +20,10 @@ FULL_BUILD=${params.FULL_BUILD}
 ********************************
 """
 
-podTemplate(label: label) {
+podTemplate(label: label, containers: [
     containerTemplate(name: "golang-buildpack", image: "${registry}${buildpack}", ttyEnabled: true, command: 'cat'),
+    ]) {
+    
     node(label) {
         try {
             timestamps {
