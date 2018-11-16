@@ -119,7 +119,7 @@ def execute(command, envs = []) {
             echo "#### Debug list dir contents####"
             ls -ltr .
         """
-        sh "bash -c $command"
+        sh "bash -c dep init && $command"
     }
     //sh "docker run --rm -v $workDir:/go/src/github.com/kyma-project/$repositoryName/ -w /go/src/github.com/kyma-project/$repositoryName/$env.APP_FOLDER $envText ${env.DOCKER_REGISTRY}$buildpack /bin/bash -c '$command'"
 }
