@@ -115,6 +115,11 @@ def execute(command, envs = []) {
             mkdir -p /go/src/github.com/kyma-project
             ln -s \$(pwd) /go/src/github.com/kyma-project/${repositoryName}
             cd /go/src/github.com/kyma-project/${repositoryName}/${appFolder}
+            echo $GOPATH
+            export GOPATH=/go/src/github.com/kyma-project
+            echo $GOPATH
+            echo "#### Debug list dir contents####"
+            ls -ltr .
         """
         sh "bash -c $command"
     }
